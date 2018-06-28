@@ -10,6 +10,6 @@
         - run main.exe
     - You will be prompted to choose a sub reddit to pull images from, it will default to r/wallpaper if left blank
 
-- To run the script with a cmd prompt (headless)
+- To run the script without a cmd prompt window (headless)
     - use ```pythonw main.pyw <subreddit>``` and then you may close the window
     - use ```taskkill /IM pythonw.exe /F``` to end the task
