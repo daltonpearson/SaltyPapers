@@ -35,7 +35,10 @@ def auth_and_update():
 if __name__ == '__main__':
     
     print("SaltyPapers by u/ThePythoneer")
-    SUB_REDDIT = input('What subreddit would you like to use (defaults to "wallpaper" if blank):\n').split("/")[-1] or 'wallpaper'
+    try:
+        SUB_REDDIT = sys.argv[1]
+    except:
+        SUB_REDDIT = 'wallpapers'
     print(f'Using: r/{SUB_REDDIT}\n')
     while True:
     # Simple loop to make the script update the wallpaper once per hour
