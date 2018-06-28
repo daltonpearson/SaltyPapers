@@ -1,6 +1,7 @@
 # SaltyPapers 
 ## by Dalton Pearson
 ### A python script to update your desktop wallpaper to match the top post on one of the wallpaper sub reddits.
+### Tested on Python 3.6
 
 - Usage:
     - Download or clone this repository
