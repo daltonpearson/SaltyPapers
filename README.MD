@@ -13,3 +13,12 @@
 - To run the script without a cmd prompt window (headless)
     - use ```pythonw main.pyw <subreddit>``` and then you may close the window
     - use ```taskkill /IM pythonw.exe /F``` to end the task
+
+- To run the script at start up
+    - Right click ```startup.bat``` and select ```New```  > ```Shortcut```
+    - Copy the shortcut
+    - In your start menu type ```Run``` press enter
+    - Type ```shell:startup``` into your ```Run``` window and press enter
+    - Paste the shortcut into the folder
+    - All done!
+    - You can change the subreddit by editting the last argument in startup.bat
