@@ -1,0 +1,7 @@
+del /s /q "%USERPROFILE%\SaltyPapers"
+del /q "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\SaltyPapers.lnk"
+mkdir "%USERPROFILE%\SaltyPapers"
+xcopy /s /i /e /y ".\*.*" "%USERPROFILE%\SaltyPapers"
+"./tools/shortcut.exe" /a:c /f:"%USERPROFILE%\SaltyPapers\SaltyPapers.lnk" /t:"%USERPROFILE%\SaltyPapers\SaltyPapers.exe" /i:"%USERPROFILE%\SaltyPapers\SaltyPapers.exe" /w:"%USERPROFILE%\SaltyPapers"
+xcopy /i /y "%USERPROFILE%\SaltyPapers\SaltyPapers.lnk" "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+start "" "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\SaltyPapers.lnk"

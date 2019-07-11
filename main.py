@@ -1,46 +1,87 @@
-import requests
+import pystray
+import settings_gui
+import salty_papers
+import threading
+import multiprocessing 
+from PIL import Image, ImageDraw
 import time
-import urllib.request
-import ctypes
+import json
 import os
-import sys
-CLIENT_ID = 'AERmPCqvfBEALQ'
-CLIENT_SECRET = 'mMm2fM63jX1onIXN-0bkdwUDXzk'
+# settings_fp = "./salty_papers.config"
+# tray_icon_fp = "./assets/salty-papers-logo.png"
+settings_fp ="./salty_papers.config"
+tray_icon_fp ="./assets/salty-papers-logo.png"
 
+def setup(icon):
+    print(os.getcwd())
+    icon.visible = True
+    sub_reddits, interval, randomize, post_max = read_config()
+    process = multiprocessing.Process(target=salty_papers.salty_papers, args=(sub_reddits, interval, randomize, post_max), daemon=True) 
+    process.start()
+    all_processes.append(process)
+def quit():
+    for process in all_processes: 
+        process.terminate()
+    icon.stop()
 
-def auth_and_update():
-    client_auth = requests.auth.HTTPBasicAuth(CLIENT_ID, CLIENT_SECRET)
-    post_data = {"grant_type": "client_credentials", "grant_type":"client_credentials"}
-    headers = {"User-Agent": "SaltyPapers/0.1 by ThePythoneer"}
-    response = requests.post("https://www.reddit.com/api/v1/access_token", auth=client_auth, data=post_data, headers=headers)
-    
-    response_header = response.json()
+def reload():
+    for process in all_processes: 
+        process.terminate()
+    sub_reddits, interval, randomize, post_max = read_config()
+    process = multiprocessing.Process(target=salty_papers.salty_papers, args=(sub_reddits, interval, randomize, post_max), daemon=True) 
+    process.start()
+    all_processes.append(process)
 
-    headers = {"Authorization": f"bearer {response_header['access_token']}", "User-Agent": "SaltyPapers/0.1 by ThePythoneer"}
-    response = requests.get(f"https://oauth.reddit.com/r/{SUB_REDDIT}/.json?limit=1", headers=headers)
-    response = response.json()['data']['children'][0]['data']
-    img_url = response['preview']['images'][0]['source']['url']
-    img_title = response['title']
-    print(f'Current Wallpaper: {img_title}\n')    
+def read_config():
+    with open(settings_fp, 'r') as f:
+        config = json.load(f)
+    return (list(config["sub_reddits"]), int(config["interval"]), bool(config["randomize"]), int(config["post_max"]))
 
-    #saves image at link to file
-    urllib.request.urlretrieve(img_url, f'reddit_wallpaper.jpeg')
+def settings_click():
+    process = multiprocessing.Process(target=settings_gui.settings_gui, args=(settings_fp,))
+    process.start()
+    all_processes.append(process)
+    while(process.is_alive()==True):
+        time.sleep(1)
+    reload()
 
-    path = os.path.abspath("reddit_wallpaper.jpeg")
-    SPI_SETDESKWALLPAPER = 20 
+def main():
+    global all_processes, icon
+    multiprocessing.freeze_support()
+    all_processes = []
+    icon = pystray.Icon('test name', 
+        Image.open(tray_icon_fp), 
+        menu=pystray.Menu(
+            pystray.MenuItem(
+                'Quit',
+                quit),
+            pystray.MenuItem(
+                'Refresh',
+                reload),
+            pystray.MenuItem(
+                'Settings',
+                
+                settings_click),))
 
-    # does weird windows stuff to set wallpaper
-    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, path , 0)
+    icon.run(setup=setup)
 
 if __name__ == '__main__':
-    
-    print("SaltyPapers by u/ThePythoneer")
-    SUB_REDDIT = input('What subreddit would you like to use (defaults to "wallpaper" if blank):\n').split("/")[-1] or 'wallpaper'
-    print(f'Using: r/{SUB_REDDIT}\n')
-    while True:
-    # Simple loop to make the script update the wallpaper once per hour
-        try:
-            auth_and_update()
-        except:
-            print('there was an error retrieving the last wallpaper')
-        time.sleep(3600)
+    main()
+    # multiprocessing.freeze_support()
+    # all_processes = []
+    # setting_process = None
+    # icon = pystray.Icon('test name', 
+    #     Image.open(tray_icon_fp), 
+    #     menu=pystray.Menu(
+    #         pystray.MenuItem(
+    #             'Quit',
+    #             quit),
+    #         pystray.MenuItem(
+    #             'Refresh',
+    #             reload),
+    #         pystray.MenuItem(
+    #             'Settings',
+    #             settings_click),))
+
+    # icon.run(setup=setup)
+

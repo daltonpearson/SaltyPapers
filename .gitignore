@@ -1,2 +1,6 @@
-reddit_wallpaper.jpeg
-.vscode/settings.json
+dist
+build
+__pycache__
+*.spec
+reddit_wallpaper.png
+SaltyPapers.zip

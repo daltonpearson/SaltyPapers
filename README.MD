@@ -1,26 +1,16 @@
-# SaltyPapers 
-## by Dalton Pearson
-### A python script to update your desktop wallpaper to match the top post on one of the wallpaper sub reddits.
-### Tested on Python 3.6
+Salty Papers By: Dalton Pearson
 
-- Usage:
-    - Download or clone this repository
-    - If you have python installed:
-        - run ```pip install -r requirments.txt``` in the repository root
-        - then to start the script use ```python main.py```
-    - If you don't have python:
-        - run main.exe
-    - You will be prompted to choose a sub reddit to pull images from, it will default to r/wallpaper if left blank
+Installation:
+    -Put this directory somewhere within your users home directory "C:\Users\<your user name>" (if you don't put it in your user directory the script will not have the needed privileges to run)
+    -Then right-click "SaltyPaper.exe" and left-click "Create Shrotcut"
+    -Put the shortcut in "C:\Users\<your user name>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+    -Now the application should run at Startup
 
-- To run the script without a cmd prompt window (headless)
-    - use ```pythonw main.pyw <subreddit>``` and then you may close the window
-    - use ```taskkill /IM pythonw.exe /F``` to end the task
+Settings:
+    -The settings can be accessed by right-clicking the system tray icon and left-clicking "Settings", adjust your setting and click "Save Settings"
+    -Multiple subreddits can be specified by seperating them by commas
+    -Randomize will pick a random post of the top <lowest post rank> of posts, from a random one of the subreddits specified
 
-- To run the script at start up
-    - Right click ```startup.bat``` and select ```New```  > ```Shortcut```
-    - Copy the shortcut
-    - In your start menu type ```Run``` press enter
-    - Type ```shell:startup``` into your ```Run``` window and press enter
-    - Paste the shortcut into the folder
-    - All done!
-    - You can change the subreddit by editting the last argument in startup.bat
+Other:
+    -You can also change your settings by editing "salty_papers.config" and then clicking "Refresh" in the tray icon menu
+    -Quit closes the app (go figuire), it can be started manually by running SaltyPapers.exe
