@@ -2,7 +2,7 @@
 * An application that will keep your desktop wallpaper updated with the top image on a subreddit
 ## Installation:
 ### Installer:
-* Download the attatched release and double click on ```install.bat``` this will install SaltyPapers and make it run automatically on startup
+* Download the attached release and double click on ```install.bat``` this will install SaltyPapers and make it run automatically on startup
 
 ### Manual Installation:
 * Put the dist directory somewhere within your users home directory ```C:\%USERPROFILE%``` (if you don't put it in your user directory the script will not have the needed privileges to run)
