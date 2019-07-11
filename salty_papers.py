@@ -6,6 +6,8 @@ import os
 import sys
 import random
 from PIL import Image, ImageOps
+
+# Please create your own API credentials but if you use mine just don't be evil
 CLIENT_ID = 'AERmPCqvfBEALQ'
 CLIENT_SECRET = 'mMm2fM63jX1onIXN-0bkdwUDXzk'
 
