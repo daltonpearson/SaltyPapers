@@ -21,5 +21,5 @@
 * The output files will be located in the ```dist``` folder
 
 ## Other:
-* You can also change your settings by editing "salty_papers.config" and then clicking "Refresh" in the tray icon menu
+* You can also change your settings by editing ```salty_papers.config``` and then clicking "Refresh" in the tray icon menu
 * Quit closes the app (go figuire), it can be started manually by running SaltyPapers.exe
